@@ -6,7 +6,7 @@ import javax.swing.*;
 
 public class Main extends JFrame{
 
-    public SpaceSurvival() {
+    public Main() {
         super("Basic Frame"); // this calls the calls the constructor from JFrame
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         add(new SpaceSurvivalPanel());
