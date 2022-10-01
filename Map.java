@@ -7,7 +7,8 @@ public class Map {
     private ArrayList<Star> stars;
     private ArrayList<Wall> walls;
 
-    private Image spriteship = new ImageIcon("starship.png").getImage().getScaledInstance(2510, 1180, Image.SCALE_DEFAULT);
+    //private Image spriteship = new ImageIcon("stargazerbckgrnd.png").getImage();
+    
   
     public Map(int xcoord, int ycoord, int l, int r, ArrayList<Star> list_of_stars, ArrayList<Wall> list_of_walls) {
       x = xcoord;
@@ -43,6 +44,5 @@ public class Map {
     }*/
 
     public void draw(Graphics g) {
-      //g.drawImage(spriteship, x, y, null);
     }
 }

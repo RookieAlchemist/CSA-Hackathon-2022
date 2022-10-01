@@ -12,6 +12,7 @@ public class SpaceSurvivalPanel extends JPanel implements ActionListener, MouseL
     
     private Player player;
     private Map map;
+    private Ship ship;
 
     private ArrayList<Star> stars = new ArrayList<Star>();
     private ArrayList<Wall> walls = new ArrayList<Wall>();
@@ -43,20 +44,26 @@ public class SpaceSurvivalPanel extends JPanel implements ActionListener, MouseL
         walls.add(new Wall(1998, 1192));
         walls.add(new Wall(1032, 457));
         walls.add(new Wall(1497, 457));
+
+        ship = new Ship(-100, -100);
       
         map = new Map(0, 0, KeyEvent.VK_A, KeyEvent.VK_D, stars, walls);
     }
 
     private void move() {
+      
         player.move(keys);
         
         for(Star star : stars){
           star.move();
         }
+      
         map.move(keys);
+
 
         controls(keys);
         repeat(keys);
+
     }
 
     //Initializes everything again in the case that a user decides to replay a certain level
@@ -76,6 +83,8 @@ public class SpaceSurvivalPanel extends JPanel implements ActionListener, MouseL
       g.setColor(Color.BLACK);
       g.fillRect(0, 0, getWidth(), getHeight());
       g.setColor(Color.WHITE);
+
+
       
       
       for(Star star : stars){
@@ -84,8 +93,9 @@ public class SpaceSurvivalPanel extends JPanel implements ActionListener, MouseL
       for(Wall wall : walls){
         wall.draw(g);
       }
-      map.draw(g);
+      ship.draw(g);
       player.draw(g);
+
       System.out.println("drew frame");
     }
 
