@@ -36,20 +36,20 @@ public class SpaceSurvivalPanel extends JPanel implements ActionListener, MouseL
           stars.add(star);
         }
 
-        walls.add(new Wall(599, 633));
-        walls.add(new Wall(1933, 633));
-        walls.add(new Wall(633, 807));
-        walls.add(new Wall(1900, 807));
-        walls.add(new Wall(218, 998));
-        walls.add(new Wall(2476, 998));
-        walls.add(new Wall(536, 1192));
-        walls.add(new Wall(1998, 1192));
-        walls.add(new Wall(1032, 457));
-        walls.add(new Wall(1497, 457));
+        walls.add(new Wall(599 - 2400, 633 - 850));
+        walls.add(new Wall(1933 - 2400, 633 - 850));
+        walls.add(new Wall(633 - 2400, 807 - 850));
+        walls.add(new Wall(1900 - 2400, 807 - 850));
+        walls.add(new Wall(218 - 2400, 998 - 850));
+        walls.add(new Wall(2476 - 2400, 998 - 850));
+        walls.add(new Wall(536 - 2400, 1192 - 850));
+        walls.add(new Wall(1998 - 2400, 1192 - 850));
+        walls.add(new Wall(1032 - 2400, 457 - 850));
+        walls.add(new Wall(1497 - 2400, 457 - 850));
 
-        ship = new Ship(-100, -100);
+        ship = new Ship(-2400, -600);
       
-        map = new Map(0, 0, KeyEvent.VK_A, KeyEvent.VK_D, stars, walls);
+        map = new Map(0, 0, KeyEvent.VK_A, KeyEvent.VK_D, stars, walls, ship);
     }
 
     private void move() {
@@ -82,7 +82,6 @@ public class SpaceSurvivalPanel extends JPanel implements ActionListener, MouseL
 
     @Override
     public void paint(Graphics g) {
-      g.drawImage(spriteship, 0, 0, null);
       g.setColor(Color.BLACK);
       g.fillRect(0, 0, getWidth(), getHeight());
       g.setColor(Color.WHITE);
@@ -97,7 +96,6 @@ public class SpaceSurvivalPanel extends JPanel implements ActionListener, MouseL
         wall.draw(g);
       }
       ship.draw(g);
-      g.drawImage(spriteship, 0, 0, null);
       player.draw(g);
     }
 

@@ -12,7 +12,8 @@ public class Ship {
       y = ycoord;
     }
 
-    public void move(boolean[] keys) {
+    public void move(int num) {
+      x += num;
     }
 
    /* public Rectangle getRect() {
