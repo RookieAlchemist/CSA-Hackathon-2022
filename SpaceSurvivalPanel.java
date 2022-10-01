@@ -17,6 +17,8 @@ public class SpaceSurvivalPanel extends JPanel implements ActionListener, MouseL
     private ArrayList<Star> stars = new ArrayList<Star>();
     private ArrayList<Wall> walls = new ArrayList<Wall>();
 
+    private Image spriteship = new ImageIcon("stargazerbckgrnd.png").getImage();
+
     public SpaceSurvivalPanel() {
         setPreferredSize(new Dimension(400, 400));
         keys = new boolean[2000];
@@ -94,9 +96,8 @@ public class SpaceSurvivalPanel extends JPanel implements ActionListener, MouseL
         wall.draw(g);
       }
       ship.draw(g);
+      g.drawImage(spriteship, 0, 0, null);
       player.draw(g);
-
-      System.out.println("drew frame");
     }
 
     @Override
