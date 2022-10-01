@@ -1,6 +1,6 @@
 //Ahmad Arain and Abdullah 
 
-//Space Survival l
+//Space Survival
 
 import javax.swing.*;
 

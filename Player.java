@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Player {
-    private int x, y, left, right,;
+    private int x, y, left, right;
 
     public Player(int l, int r) {
         left = l;
