@@ -16,8 +16,8 @@ public class SpaceSurvivalPanel extends JPanel implements ActionListener, MouseL
 
     private ArrayList<Star> stars = new ArrayList<Star>();
     private ArrayList<Wall> walls = new ArrayList<Wall>();
-
-    private Image spriteship = new ImageIcon("stargazerbckgrnd.png").getImage();
+//2510, 1100
+    private Image spriteship = new ImageIcon("stargazerbckgrnd.png").getImage().getScaledInstance(2510, 1100, Image.SCALE_DEFAULT);
 
     public SpaceSurvivalPanel() {
         setPreferredSize(new Dimension(400, 400));
@@ -36,20 +36,20 @@ public class SpaceSurvivalPanel extends JPanel implements ActionListener, MouseL
           stars.add(star);
         }
 
-        walls.add(new Wall(599 - 2400, 633 - 850));
-        walls.add(new Wall(1933 - 2400, 633 - 850));
-        walls.add(new Wall(633 - 2400, 807 - 850));
-        walls.add(new Wall(1900 - 2400, 807 - 850));
-        walls.add(new Wall(218 - 2400, 998 - 850));
-        walls.add(new Wall(2476 - 2400, 998 - 850));
-        walls.add(new Wall(536 - 2400, 1192 - 850));
-        walls.add(new Wall(1998 - 2400, 1192 - 850));
-        walls.add(new Wall(1032 - 2400, 457 - 850));
-        walls.add(new Wall(1497 - 2400, 457 - 850));
+        walls.add(new Wall(599 - 2200, 633 - 800));
+        walls.add(new Wall(1933 - 2200, 633 - 800));
+        walls.add(new Wall(633 - 2200, 807 - 800));
+        walls.add(new Wall(1900 - 2200, 807 - 800));
+        walls.add(new Wall(218 - 2200, 998 - 800));
+        walls.add(new Wall(2476 - 2200, 998 - 800));
+        walls.add(new Wall(536 - 2200, 1192 - 800));
+        walls.add(new Wall(1998 - 2200, 1192 - 800));
+        walls.add(new Wall(1032 - 2200, 457 - 800));
+        walls.add(new Wall(1497 - 2200, 457 - 800));
 
-        ship = new Ship(-2400, -600);
+        ship = new Ship(-2200, -600);
       
-        map = new Map(0, 0, KeyEvent.VK_A, KeyEvent.VK_D, stars, walls, ship);
+        map = new Map(0, 0, KeyEvent.VK_A, KeyEvent.VK_D, stars, walls, ship, player);
     }
 
     private void move() {
@@ -61,7 +61,6 @@ public class SpaceSurvivalPanel extends JPanel implements ActionListener, MouseL
         }
       
         map.move(keys);
-
 
         controls(keys);
         repeat(keys);
@@ -92,10 +91,11 @@ public class SpaceSurvivalPanel extends JPanel implements ActionListener, MouseL
       for(Star star : stars){
         star.draw(g);
       }
-      for(Wall wall : walls){
-        wall.draw(g);
-      }
       ship.draw(g);
+      /*for(Wall wall : walls){
+        wall.draw(g);
+      }*/
+      
       player.draw(g);
     }
 

@@ -7,41 +7,60 @@ public class Map {
     private ArrayList<Star> stars;
     private ArrayList<Wall> walls;
     private Ship ship;
+    private Player player;
 
     //private Image spriteship = new ImageIcon("stargazerbckgrnd.png").getImage();
     
   
-    public Map(int xcoord, int ycoord, int l, int r, ArrayList<Star> list_of_stars, ArrayList<Wall> list_of_walls, Ship shipy) {
+    public Map(int xcoord, int ycoord, int l, int r, ArrayList<Star> list_of_stars, ArrayList<Wall> list_of_walls, Ship starship, Player P) {
       x = xcoord;
       y = ycoord;
       left = l;
       right = r;
       stars = list_of_stars;
       walls = list_of_walls;
-      ship = shipy;
+      ship = starship;
+      player = P;
     }
 
     public void move(boolean[] keys) {
       if (keys[left]) {
-        for(Star star : stars){
-          star.move(5);
-        }
-        x += 5;
-        for(Wall wall : walls){
-          wall.move(5);
-        }
-        ship.move(5);
+        moveLeft();
       }
       if (keys[right]) {
-        for(Star star : stars){
-          star.move(-5);
-        }
-        x -= 5;
-        for(Wall wall : walls){
-          wall.move(-5);
-        }
-        ship.move(-5);
+        moveRight();
       }
+      for(Wall wall: walls){
+        if (wall.getRect().intersects(player.getRect())){
+          if (wall.getX() < player.getX()){
+            moveRight();
+          } else {
+            moveLeft();
+          }
+        }
+      }
+    }
+
+    private void moveLeft(){
+      for(Star star : stars){
+        star.move(5);
+      }
+      x += 5;
+      for(Wall wall : walls){
+        wall.move(5);
+      }
+      ship.move(5);
+    }
+
+    private void moveRight(){
+      for(Star star : stars){
+        star.move(-5);
+      }
+      x -= 5;
+      for(Wall wall : walls){
+        wall.move(-5);
+      }
+      ship.move(-5);
     }
 
     /*public Rectangle getRect() {
