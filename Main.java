@@ -1,5 +1,5 @@
 //Ahmad Arain and Abdullah 
-
+// 400 * 400
 //Space Survival
 
 import javax.swing.*;

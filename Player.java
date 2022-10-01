@@ -7,17 +7,17 @@ public class Player {
     public Player(int l, int r) {
         left = l;
         right = r;
-        x = 200;
-        y = 400;
+        x = 175;
+        y = 250;
     }
 
     public void move(boolean[] keys) {
-        if (keys[left] && x > 0) {
+        /*if (keys[left] && x > 0) {
             x -= 10;
         }
         if (keys[right] && x < 720) {
             x += 10;
-        }
+        }*/
     }
 
     public int getX() {
@@ -28,11 +28,11 @@ public class Player {
     }
 
     public Rectangle getRect() {
-        return new Rectangle(x, y, 80, 30);
+        return new Rectangle(x, y, 50, 50);
     }
 
     public void draw(Graphics g) {
-        g.fillRect(x, y, 80, 30);
+        g.fillRect(x, y, 50, 50);
     }
 }
 

@@ -6,15 +6,19 @@ public class Star{
 
     public Star(){
         Random rand = new Random();
-        x = rand.nextInt(800);
-        y = rand.nextInt(600);
+        x = rand.nextInt(400);
+        y = rand.nextInt(400);
     }
 
     public void move(){
-        x -= 15;
+        x -= 10;
         if(x < 0){
-            x = 805;
+            x = 405;
         }
+    }
+
+    public void move(int num){
+        x += num;
     }
 
     public void draw(Graphics g){

@@ -9,12 +9,15 @@ import java.util.Random;
 public class SpaceSurvivalPanel extends JPanel implements ActionListener, MouseListener, KeyListener {
     private Timer timer;
     private boolean[] keys;
+    
     private Player player;
+    private Map map;
 
     private ArrayList<Star> stars = new ArrayList<Star>();
+    private ArrayList<Wall> walls = new ArrayList<Wall>();
 
     public SpaceSurvivalPanel() {
-        setPreferredSize(new Dimension(800, 600));
+        setPreferredSize(new Dimension(400, 400));
         keys = new boolean[2000];
         setFocusable(true);
         requestFocus();
@@ -25,20 +28,35 @@ public class SpaceSurvivalPanel extends JPanel implements ActionListener, MouseL
 
         //Initializing all objects at start of game
         player = new Player(KeyEvent.VK_A, KeyEvent.VK_D);
-
-        for(int i = 0; i < 100; i++){
+        for(int i = 0; i < 50; i++){
           Star star = new Star();
           stars.add(star);
         }
+
+        walls.add(new Wall(599, 633));
+        walls.add(new Wall(1933, 633));
+        walls.add(new Wall(633, 807));
+        walls.add(new Wall(1900, 807));
+        walls.add(new Wall(218, 998));
+        walls.add(new Wall(2476, 998));
+        walls.add(new Wall(536, 1192));
+        walls.add(new Wall(1998, 1192));
+        walls.add(new Wall(1032, 457));
+        walls.add(new Wall(1497, 457));
+      
+        map = new Map(0, 0, KeyEvent.VK_A, KeyEvent.VK_D, stars, walls);
     }
 
     private void move() {
         player.move(keys);
-        controls(keys);
-        repeat(keys);
+        
         for(Star star : stars){
           star.move();
         }
+        map.move(keys);
+
+        controls(keys);
+        repeat(keys);
     }
 
     //Initializes everything again in the case that a user decides to replay a certain level
@@ -58,10 +76,17 @@ public class SpaceSurvivalPanel extends JPanel implements ActionListener, MouseL
       g.setColor(Color.BLACK);
       g.fillRect(0, 0, getWidth(), getHeight());
       g.setColor(Color.WHITE);
-      player.draw(g);
+      
+      
       for(Star star : stars){
         star.draw(g);
       }
+      for(Wall wall : walls){
+        wall.draw(g);
+      }
+      map.draw(g);
+      player.draw(g);
+      System.out.println("drew frame");
     }
 
     @Override
