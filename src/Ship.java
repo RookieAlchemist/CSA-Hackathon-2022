@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Ship {
     private int x, y, left, right;
 
-    private Image spriteship = new ImageIcon("stargazerbckgrnd.png").getImage();
+    private Image spriteship = new ImageIcon("Images/stargazerbckgrnd.png").getImage();
   
     public Ship(int xcoord, int ycoord) {
       x = xcoord;

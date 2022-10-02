@@ -4,7 +4,7 @@ import java.awt.*;
 public class Teleporter {
     private int x, y, x2, y2;
 
-    private Image teleprterpic = new ImageIcon("teleport.png").getImage().getScaledInstance(120, 70, Image.SCALE_DEFAULT);
+    private Image teleprterpic = new ImageIcon("Images/teleport.png").getImage().getScaledInstance(120, 70, Image.SCALE_DEFAULT);
 
     public Teleporter(int xcoord, int ycoord, int xcoord2, int ycoord2) {
         x = xcoord;

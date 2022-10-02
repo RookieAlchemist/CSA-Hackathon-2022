@@ -19,12 +19,13 @@ public class SpaceSurvivalPanel extends JPanel implements ActionListener, MouseL
     private ArrayList<Teleporter> teleporters = new ArrayList<Teleporter>();
     private ArrayList<Document> documents = new ArrayList<Document>();
 //2510, 1100
-    private Image spriteship = new ImageIcon("stargazerbckgrnd.png").getImage().getScaledInstance(2510, 1100, Image.SCALE_DEFAULT);
+    private Image spriteship = new ImageIcon("Images/stargazerbckgrnd.png").getImage().getScaledInstance(2510, 1100, Image.SCALE_DEFAULT);
     private Image teleprterpic = new ImageIcon("teleport.png").getImage().getScaledInstance(80, 120, Image.SCALE_DEFAULT);
-    private Image scrollicon = new ImageIcon("scrollicon.png").getImage().getScaledInstance(40, 50, Image.SCALE_DEFAULT);
-    private Image scroll1 = new ImageIcon("scroll1.png").getImage();
-    private Image astroR = new ImageIcon("astronautL.png").getImage().getScaledInstance(40, 50, Image.SCALE_DEFAULT);
-    private Image astrol = new ImageIcon("astronautR.png").getImage().getScaledInstance(40, 50, Image.SCALE_DEFAULT);
+    private Image scrollicon = new ImageIcon("Images/scrollicon.png").getImage().getScaledInstance(40, 50, Image.SCALE_DEFAULT);
+    private Image scroll1 = new ImageIcon("Images/scroll1.png").getImage();
+    private Image scroll2 = new ImageIcon("Images/scroll2.png").getImage();
+    private Image astroR = new ImageIcon("Images/astronautL.png").getImage().getScaledInstance(40, 50, Image.SCALE_DEFAULT);
+    private Image astrol = new ImageIcon("Images/astronautR.png").getImage().getScaledInstance(40, 50, Image.SCALE_DEFAULT);
 
     public SpaceSurvivalPanel() {
         setPreferredSize(new Dimension(400, 400));
@@ -60,6 +61,7 @@ public class SpaceSurvivalPanel extends JPanel implements ActionListener, MouseL
         teleporters.add(new Teleporter(2276 - 2250 - 1955 + 1380 - 245, 357 - 700 + 73, 733 - 2200, 1192 - 730));
 
         documents.add(new Document(1312 - 2260, 635 - 610, KeyEvent.VK_E, KeyEvent.VK_Q, KeyEvent.VK_W, KeyEvent.VK_S, scroll1, player));
+        documents.add(new Document(641 - 2260 + 50, 506 - 610 - 20, KeyEvent.VK_E, KeyEvent.VK_Q, KeyEvent.VK_W, KeyEvent.VK_S, scroll2, player));
 
         ship = new Ship(-2200, -600);
       

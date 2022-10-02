@@ -1,7 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 
-public class Document {
+public class Trivia {
     private int x, y, open, close, scrollup, scrolldown;
     private int scrolly = 0;
     private Player player;
@@ -10,7 +10,7 @@ public class Document {
     private Image scrollicon = new ImageIcon("Images/scrollicon.png").getImage().getScaledInstance(40, 50, Image.SCALE_DEFAULT);
     private Image scroll;
 
-    public Document(int X, int Y, int e, int q, int w, int s, Image pic, Player character) {
+    public Trivia(int X, int Y, int e, int q, int w, int s, Image pic, Player character) {
         open = e;
         close = q;
         scrollup = w;
@@ -71,4 +71,3 @@ public class Document {
         }
     }
 }
-

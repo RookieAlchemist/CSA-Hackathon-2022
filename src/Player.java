@@ -4,8 +4,8 @@ import java.awt.*;
 public class Player {
     private int x, y, left, right;
 
-    private Image astroR = new ImageIcon("astronautL.png").getImage().getScaledInstance(30, 60, Image.SCALE_DEFAULT);
-    private Image astroL = new ImageIcon("astronautR.png").getImage().getScaledInstance(30, 60, Image.SCALE_DEFAULT);
+    private Image astroR = new ImageIcon("Images/astronautL.png").getImage().getScaledInstance(30, 60, Image.SCALE_DEFAULT);
+    private Image astroL = new ImageIcon("Images/astronautR.png").getImage().getScaledInstance(30, 60, Image.SCALE_DEFAULT);
 
     private Image currentSprite = astroL;
 
