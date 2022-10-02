@@ -1,45 +1,40 @@
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class Trivia {
-    private int x, y, open, close, scrollup, scrolldown;
-    private int scrolly = 0;
+    private int x, y, A, B, C, D, open;
     private Player player;
     private boolean opendoc = false;
+    private ArrayList<Question> questions = new ArrayList<Question>();
+    private Image currentpic;
+    private int cooldown = 0;
 
-    private Image scrollicon = new ImageIcon("Images/scrollicon.png").getImage().getScaledInstance(40, 50, Image.SCALE_DEFAULT);
-    private Image scroll;
-
-    public Trivia(int X, int Y, int e, int q, int w, int s, Image pic, Player character) {
-        open = e;
-        close = q;
-        scrollup = w;
-        scrolldown = s;
+    public Trivia(int X, int Y, int h, int j, int k, int l, int e, Player character, ArrayList<Question> Qs) {
+        A = h;
+        B = j;
+        C = k;
+        D = l;
         x = X;
         y = Y;
+        open = e;
         player = character;
-        scroll = pic;
+        questions = Qs;
     }
 
     public void move(boolean[] keys) {
+        cooldown++;
         if (keys[open] && player.getRect().intersects(getRect())) {
             opendoc = true;
         }
-        if (keys[close]) {
+        if (opendoc){
+            for(Question question : questions){
+                while(!keys[question.getAns()]){
+                    currentpic = question.getImage();
+                }
+            }
+            currentpic = null;
             opendoc = false;
-            scrolly = 0;
-        }
-        if (keys[scrolldown]){
-            scrolly -= 2;
-        }
-        if (keys[scrollup]){
-            scrolly += 2;
-        }
-        if (scrolly > 0){
-            scrolly -= 2;
-        }
-        if (scrolly + scroll.getHeight(null) < 400){
-            scrolly += 2;
         }
     }
 
@@ -58,16 +53,15 @@ public class Trivia {
     }
 
     public Rectangle getRect() {
-        return new Rectangle(x, y, 50, 50);
-    }
-
-    public void drawicon(Graphics g){
-        g.drawImage(scrollicon, x, y, null);
+        return new Rectangle(x, y, 80, 40);
     }
 
     public void draw(Graphics g) {
         if(opendoc){
-            g.drawImage(scroll, 0, scrolly, null);
+            g.fillRect(x, y, 80, 40);
+        }
+        if(currentpic != null){
+            g.drawImage(currentpic, 0, 0, null);
         }
     }
 }
