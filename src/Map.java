@@ -8,11 +8,12 @@ public class Map {
     private ArrayList<Wall> walls;
     private ArrayList<Teleporter> teleporters;
     private ArrayList<Document> documents;
+    private ArrayList<Trivia> trivias;
     private Ship ship;
     private Player player;
     private int cooldown;
     
-    public Map(int xcoord, int ycoord, int l, int r, int w, ArrayList<Star> list_of_stars, ArrayList<Wall> list_of_walls, Ship starship, Player P, ArrayList<Teleporter> portals, ArrayList<Document> docs) {
+    public Map(int xcoord, int ycoord, int l, int r, int w, ArrayList<Star> list_of_stars, ArrayList<Wall> list_of_walls, Ship starship, Player P, ArrayList<Teleporter> portals, ArrayList<Document> docs, ArrayList<Trivia> Ts) {
       x = xcoord;
       y = ycoord;
       left = l;
@@ -24,6 +25,7 @@ public class Map {
       player = P;
       teleporters = portals;
       documents = docs;
+      trivias = Ts;
     }
 
     public void move(boolean[] keys) {
@@ -61,9 +63,6 @@ public class Map {
     }
 
     private void move(int num){
-      /*for(Star star : stars){
-        star.move(num);
-      }*/
       x += 5;
       for(Wall wall : walls){
         wall.move(num);
@@ -73,6 +72,9 @@ public class Map {
       }
       for(Document document : documents){
         document.move(num);
+      }
+      for(Trivia trivia : trivias){
+        trivia.move(num);
       }
       ship.move(num);
     }
@@ -90,6 +92,9 @@ public class Map {
       }
       for(Document document : documents){
         document.moveY(num);
+      }
+      for(Trivia trivia : trivias){
+        trivia.moveY(num);
       }
       ship.moveY(num);
     }

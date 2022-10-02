@@ -18,14 +18,28 @@ public class SpaceSurvivalPanel extends JPanel implements ActionListener, MouseL
     private ArrayList<Wall> walls = new ArrayList<Wall>();
     private ArrayList<Teleporter> teleporters = new ArrayList<Teleporter>();
     private ArrayList<Document> documents = new ArrayList<Document>();
+    private ArrayList<Trivia> trivias = new ArrayList<Trivia>();
 //2510, 1100
     private Image spriteship = new ImageIcon("Images/stargazerbckgrnd.png").getImage().getScaledInstance(2510, 1100, Image.SCALE_DEFAULT);
     private Image teleprterpic = new ImageIcon("teleport.png").getImage().getScaledInstance(80, 120, Image.SCALE_DEFAULT);
     private Image scrollicon = new ImageIcon("Images/scrollicon.png").getImage().getScaledInstance(40, 50, Image.SCALE_DEFAULT);
     private Image scroll1 = new ImageIcon("Images/scroll1.png").getImage();
     private Image scroll2 = new ImageIcon("Images/scroll2.png").getImage();
+    private Image scroll3 = new ImageIcon("Images/scroll3.png").getImage();
+    private Image Q1 = new ImageIcon("Images/questions/q1.png").getImage();
+    private Image Q2 = new ImageIcon("Images/questions/q2.png").getImage();
+    private Image Q3 = new ImageIcon("Images/questions/q3.png").getImage();
+    private Image Q4 = new ImageIcon("Images/questions/q4.png").getImage();
+    private Image Q5 = new ImageIcon("Images/questions/q5.png").getImage();
+    private Image Q6 = new ImageIcon("Images/questions/q6.png").getImage();
+    private Image Q7 = new ImageIcon("Images/questions/q7.png").getImage();
+    private Image Q8 = new ImageIcon("Images/questions/q8.png").getImage();
     private Image astroR = new ImageIcon("Images/astronautL.png").getImage().getScaledInstance(40, 50, Image.SCALE_DEFAULT);
     private Image astrol = new ImageIcon("Images/astronautR.png").getImage().getScaledInstance(40, 50, Image.SCALE_DEFAULT);
+
+    private ArrayList<Question> set1 = new ArrayList<Question>();
+    private ArrayList<Question> set2 = new ArrayList<Question>();
+    private ArrayList<Question> set3 = new ArrayList<Question>();
 
     public SpaceSurvivalPanel() {
         setPreferredSize(new Dimension(400, 400));
@@ -62,10 +76,29 @@ public class SpaceSurvivalPanel extends JPanel implements ActionListener, MouseL
 
         documents.add(new Document(1312 - 2260, 635 - 610, KeyEvent.VK_E, KeyEvent.VK_Q, KeyEvent.VK_W, KeyEvent.VK_S, scroll1, player));
         documents.add(new Document(641 - 2260 + 50, 506 - 610 - 20, KeyEvent.VK_E, KeyEvent.VK_Q, KeyEvent.VK_W, KeyEvent.VK_S, scroll2, player));
+        documents.add(new Document(1971 - 2260, 1070 - 635, KeyEvent.VK_E, KeyEvent.VK_Q, KeyEvent.VK_W, KeyEvent.VK_S, scroll3, player));
+
+        set1.add(new Question(Q1, KeyEvent.VK_H));
+        set1.add(new Question(Q2, KeyEvent.VK_L));
+        set1.add(new Question(Q2, KeyEvent.VK_L));
+
+        set2.add(new Question(Q3, KeyEvent.VK_J));
+        set2.add(new Question(Q4, KeyEvent.VK_K));
+        set2.add(new Question(Q5, KeyEvent.VK_H));
+        set2.add(new Question(Q5, KeyEvent.VK_H));
+
+        set3.add(new Question(Q6, KeyEvent.VK_H));
+        set3.add(new Question(Q7, KeyEvent.VK_L));
+        set3.add(new Question(Q8, KeyEvent.VK_K));
+        set3.add(new Question(Q8, KeyEvent.VK_K));
+
+        trivias.add(new Trivia(1645 - 2220, 1013 - 580, KeyEvent.VK_H, KeyEvent.VK_J, KeyEvent.VK_K, KeyEvent.VK_L, KeyEvent.VK_E, player, set1));
+        trivias.add(new Trivia(1483 - 2220, 472 - 600, KeyEvent.VK_H, KeyEvent.VK_J, KeyEvent.VK_K, KeyEvent.VK_L, KeyEvent.VK_E, player, set2));
+        trivias.add(new Trivia(1642 - 2200, 648 - 600, KeyEvent.VK_H, KeyEvent.VK_J, KeyEvent.VK_K, KeyEvent.VK_L, KeyEvent.VK_E, player, set3));
 
         ship = new Ship(-2200, -600);
       
-        map = new Map(0, 0, KeyEvent.VK_A, KeyEvent.VK_D, KeyEvent.VK_W, stars, walls, ship, player, teleporters, documents);
+        map = new Map(0, 0, KeyEvent.VK_A, KeyEvent.VK_D, KeyEvent.VK_W, stars, walls, ship, player, teleporters, documents, trivias);
     }
 
     private void move() {
@@ -77,6 +110,9 @@ public class SpaceSurvivalPanel extends JPanel implements ActionListener, MouseL
         }
         for(Document document: documents){
           document.move(keys);
+        }
+        for(Trivia trivia: trivias){
+          trivia.move(keys);
         }
       
         map.move(keys);
@@ -121,6 +157,9 @@ public class SpaceSurvivalPanel extends JPanel implements ActionListener, MouseL
       }
       for(Document document: documents){
         document.draw(g);
+      }
+      for(Trivia trivia: trivias){
+        trivia.draw(g);
       }
     }
 

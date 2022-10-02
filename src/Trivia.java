@@ -7,7 +7,8 @@ public class Trivia {
     private Player player;
     private boolean opendoc = false;
     private ArrayList<Question> questions = new ArrayList<Question>();
-    private Image currentpic;
+    private Question currentQuestion;
+    private int questionnum = 0;
     private int cooldown = 0;
 
     public Trivia(int X, int Y, int h, int j, int k, int l, int e, Player character, ArrayList<Question> Qs) {
@@ -24,16 +25,19 @@ public class Trivia {
 
     public void move(boolean[] keys) {
         cooldown++;
+        currentQuestion = questions.get(questionnum);
+        if (keys[open]){System.out.println(opendoc);}
         if (keys[open] && player.getRect().intersects(getRect())) {
             opendoc = true;
         }
         if (opendoc){
-            for(Question question : questions){
-                while(!keys[question.getAns()]){
-                    currentpic = question.getImage();
-                }
-            }
-            currentpic = null;
+            if(keys[currentQuestion.getAns()] && cooldown > 20){
+                cooldown = 0;
+                if(questions.size() > questionnum)
+                    questionnum++;
+            } 
+        }
+        if(questionnum + 1 == questions.size()){
             opendoc = false;
         }
     }
@@ -58,10 +62,7 @@ public class Trivia {
 
     public void draw(Graphics g) {
         if(opendoc){
-            g.fillRect(x, y, 80, 40);
-        }
-        if(currentpic != null){
-            g.drawImage(currentpic, 0, 0, null);
+            g.drawImage(currentQuestion.getImage(), 0, 0, null);
         }
     }
 }
