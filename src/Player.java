@@ -4,6 +4,11 @@ import java.awt.*;
 public class Player {
     private int x, y, left, right;
 
+    private Image astroR = new ImageIcon("astronautL.png").getImage().getScaledInstance(30, 60, Image.SCALE_DEFAULT);
+    private Image astroL = new ImageIcon("astronautR.png").getImage().getScaledInstance(30, 60, Image.SCALE_DEFAULT);
+
+    private Image currentSprite = astroL;
+
     public Player(int l, int r) {
         left = l;
         right = r;
@@ -12,12 +17,12 @@ public class Player {
     }
 
     public void move(boolean[] keys) {
-        /*if (keys[left] && x > 0) {
-            x -= 10;
+        if (keys[right]) {
+            currentSprite = astroL;
         }
-        if (keys[right] && x < 720) {
-            x += 10;
-        }*/
+        else if (keys[left]) {
+            currentSprite = astroR;
+        }
     }
 
     public int getX() {
@@ -32,7 +37,7 @@ public class Player {
     }
 
     public void draw(Graphics g) {
-        g.fillRect(x, y, 50, 50);
+        g.drawImage(currentSprite, x + 10, y - 10, null);
     }
 }
 

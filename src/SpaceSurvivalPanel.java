@@ -23,6 +23,8 @@ public class SpaceSurvivalPanel extends JPanel implements ActionListener, MouseL
     private Image teleprterpic = new ImageIcon("teleport.png").getImage().getScaledInstance(80, 120, Image.SCALE_DEFAULT);
     private Image scrollicon = new ImageIcon("scrollicon.png").getImage().getScaledInstance(40, 50, Image.SCALE_DEFAULT);
     private Image scroll1 = new ImageIcon("scroll1.png").getImage();
+    private Image astroR = new ImageIcon("astronautL.png").getImage().getScaledInstance(40, 50, Image.SCALE_DEFAULT);
+    private Image astrol = new ImageIcon("astronautR.png").getImage().getScaledInstance(40, 50, Image.SCALE_DEFAULT);
 
     public SpaceSurvivalPanel() {
         setPreferredSize(new Dimension(400, 400));
@@ -108,13 +110,13 @@ public class SpaceSurvivalPanel extends JPanel implements ActionListener, MouseL
         star.draw(g);
       }
       ship.draw(g);
-      for(Teleporter teleporter : teleporters){
-        teleporter.draw(g);
-      }
       for(Document document: documents){
         document.drawicon(g);
       }
       player.draw(g);
+      for(Teleporter teleporter : teleporters){
+        teleporter.draw(g);
+      }
       for(Document document: documents){
         document.draw(g);
       }
