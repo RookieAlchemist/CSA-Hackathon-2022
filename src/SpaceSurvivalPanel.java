@@ -13,6 +13,9 @@ public class SpaceSurvivalPanel extends JPanel implements ActionListener, MouseL
     private Player player;
     private Map map;
     private Ship ship;
+    private boolean missionscomplete = false;
+    private boolean gameover = false;
+    private Starting start;
 
     private ArrayList<Star> stars = new ArrayList<Star>();
     private ArrayList<Wall> walls = new ArrayList<Wall>();
@@ -26,6 +29,7 @@ public class SpaceSurvivalPanel extends JPanel implements ActionListener, MouseL
     private Image scroll1 = new ImageIcon("Images/scroll1.png").getImage();
     private Image scroll2 = new ImageIcon("Images/scroll2.png").getImage();
     private Image scroll3 = new ImageIcon("Images/scroll3.png").getImage();
+    private Image end = new ImageIcon("Images/victoryscreen.png").getImage();
     private Image Q1 = new ImageIcon("Images/questions/q1.png").getImage();
     private Image Q2 = new ImageIcon("Images/questions/q2.png").getImage();
     private Image Q3 = new ImageIcon("Images/questions/q3.png").getImage();
@@ -97,8 +101,10 @@ public class SpaceSurvivalPanel extends JPanel implements ActionListener, MouseL
         trivias.add(new Trivia(1642 - 2200, 648 - 600, KeyEvent.VK_H, KeyEvent.VK_J, KeyEvent.VK_K, KeyEvent.VK_L, KeyEvent.VK_E, player, set3));
 
         ship = new Ship(-2200, -600);
+
+        start = new Starting(2476 - 2200 - 150, 998 - 800);
       
-        map = new Map(0, 0, KeyEvent.VK_A, KeyEvent.VK_D, KeyEvent.VK_W, stars, walls, ship, player, teleporters, documents, trivias);
+        map = new Map(0, 0, KeyEvent.VK_A, KeyEvent.VK_D, KeyEvent.VK_W, stars, walls, ship, player, teleporters, documents, trivias, start);
     }
 
     private void move() {
@@ -114,7 +120,14 @@ public class SpaceSurvivalPanel extends JPanel implements ActionListener, MouseL
         for(Trivia trivia: trivias){
           trivia.move(keys);
         }
-      
+        if(trivias.get(0).complete() && trivias.get(1).complete() && trivias.get(2).complete()){
+          missionscomplete = true;
+        }
+
+        if(player.getRect().intersects(start.getRect()) && missionscomplete && keys[KeyEvent.VK_E]){
+          gameover = true;
+        }
+
         map.move(keys);
 
         controls(keys);
@@ -131,19 +144,12 @@ public class SpaceSurvivalPanel extends JPanel implements ActionListener, MouseL
     private void controls(boolean[] keys){
     }
 
-    //draws all in game elements
-    private void drawGame(Graphics g) {
-    }
-
     @Override
     public void paint(Graphics g) {
       g.setColor(Color.BLACK);
       g.fillRect(0, 0, getWidth(), getHeight());
       g.setColor(Color.WHITE);
 
-
-      
-      
       for(Star star : stars){
         star.draw(g);
       }
@@ -160,6 +166,13 @@ public class SpaceSurvivalPanel extends JPanel implements ActionListener, MouseL
       }
       for(Trivia trivia: trivias){
         trivia.draw(g);
+      }
+      if(missionscomplete){
+        g.setFont(new Font("Agency FB", Font.BOLD, 20));
+        g.drawString("Missions Complete: Navigate to the start and press E.", 30, 370);
+      } 
+      if(gameover){
+        g.drawImage(end, 0, 0, null);
       }
     }
 

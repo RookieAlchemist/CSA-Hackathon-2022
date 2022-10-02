@@ -10,6 +10,7 @@ public class Trivia {
     private Question currentQuestion;
     private int questionnum = 0;
     private int cooldown = 0;
+    private boolean complete = false;
 
     public Trivia(int X, int Y, int h, int j, int k, int l, int e, Player character, ArrayList<Question> Qs) {
         A = h;
@@ -26,7 +27,6 @@ public class Trivia {
     public void move(boolean[] keys) {
         cooldown++;
         currentQuestion = questions.get(questionnum);
-        if (keys[open]){System.out.println(opendoc);}
         if (keys[open] && player.getRect().intersects(getRect())) {
             opendoc = true;
         }
@@ -39,6 +39,7 @@ public class Trivia {
         }
         if(questionnum + 1 == questions.size()){
             opendoc = false;
+            complete = true;
         }
     }
 
@@ -54,6 +55,10 @@ public class Trivia {
     }
     public void moveY(int num) {
         y += num;
+    }
+
+    public boolean complete(){
+        return complete;
     }
 
     public Rectangle getRect() {
