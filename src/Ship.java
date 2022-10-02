@@ -16,6 +16,10 @@ public class Ship {
       x += num;
     }
 
+    public void moveY(int num) {
+      y += num;
+    }
+
    /* public Rectangle getRect() {
     }*/
 

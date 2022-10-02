@@ -3,65 +3,92 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class Map {
-    private int x, y, left, right;
+    private int x, y, left, right ,teleport;
     private ArrayList<Star> stars;
     private ArrayList<Wall> walls;
+    private ArrayList<Teleporter> teleporters;
     private Ship ship;
     private Player player;
+    private int cooldown;
 
     //private Image spriteship = new ImageIcon("stargazerbckgrnd.png").getImage();
     
   
-    public Map(int xcoord, int ycoord, int l, int r, ArrayList<Star> list_of_stars, ArrayList<Wall> list_of_walls, Ship starship, Player P) {
+    public Map(int xcoord, int ycoord, int l, int r, int w, ArrayList<Star> list_of_stars, ArrayList<Wall> list_of_walls, Ship starship, Player P, ArrayList<Teleporter> portals) {
       x = xcoord;
       y = ycoord;
       left = l;
       right = r;
+      teleport = w;
       stars = list_of_stars;
       walls = list_of_walls;
       ship = starship;
       player = P;
+      teleporters = portals;
     }
 
     public void move(boolean[] keys) {
       if (keys[left]) {
-        moveLeft();
+        move(5);
       }
       if (keys[right]) {
-        moveRight();
+        move(-5);
       }
       for(Wall wall: walls){
         if (wall.getRect().intersects(player.getRect())){
           if (wall.getX() < player.getX()){
-            moveRight();
+            move(-5);
           } else {
-            moveLeft();
+            move(5);
           }
         }
       }
+      cooldown++;
+      for(Teleporter teleporter : teleporters){
+        if (keys[teleport] && player.getRect().intersects(teleporter.getRect1()) && cooldown > 10){
+          move(teleporter.getX() - teleporter.getX2());
+          moveY(teleporter.getY() - teleporter.getY2());
+          cooldown = 0;
+        } else if (keys[teleport] && player.getRect().intersects(teleporter.getRect2()) && cooldown > 10){
+          move(teleporter.getX2() - teleporter.getX());
+          moveY(teleporter.getY2() - teleporter.getY());
+          cooldown = 0;
+        }
+      }
+      if (keys[teleport] && cooldown > 10){
+        System.out.println("" + x + ", " + y);
+        cooldown = 0;
+      }
     }
 
-    private void moveLeft(){
-      for(Star star : stars){
-        star.move(5);
-      }
+    private void move(int num){
+      /*for(Star star : stars){
+        star.move(num);
+      }*/
       x += 5;
       for(Wall wall : walls){
-        wall.move(5);
+        wall.move(num);
       }
-      ship.move(5);
+      for(Teleporter teleporter : teleporters){
+        teleporter.move(num);
+      }
+      ship.move(num);
     }
 
-    private void moveRight(){
-      for(Star star : stars){
-        star.move(-5);
-      }
-      x -= 5;
+    private void moveY(int num){
+      /*for(Star star : stars){
+        star.moveY(num);
+      }*/
+      x += 5;
       for(Wall wall : walls){
-        wall.move(-5);
+        wall.moveY(num);
       }
-      ship.move(-5);
+      for(Teleporter teleporter : teleporters){
+        teleporter.moveY(num);
+      }
+      ship.moveY(num);
     }
+
 
     /*public Rectangle getRect() {
     }*/

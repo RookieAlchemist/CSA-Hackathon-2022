@@ -20,6 +20,9 @@ public class Star{
     public void move(int num){
         x += num;
     }
+    public void moveY(int num){
+        y += num;
+    }
 
     public void draw(Graphics g){
         g.setColor(Color.white);

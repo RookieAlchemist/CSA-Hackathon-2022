@@ -16,8 +16,10 @@ public class SpaceSurvivalPanel extends JPanel implements ActionListener, MouseL
 
     private ArrayList<Star> stars = new ArrayList<Star>();
     private ArrayList<Wall> walls = new ArrayList<Wall>();
+    private ArrayList<Teleporter> teleporters = new ArrayList<Teleporter>();
 //2510, 1100
     private Image spriteship = new ImageIcon("stargazerbckgrnd.png").getImage().getScaledInstance(2510, 1100, Image.SCALE_DEFAULT);
+    private Image teleprterpic = new ImageIcon("teleport.png").getImage().getScaledInstance(80, 120, Image.SCALE_DEFAULT);
 
     public SpaceSurvivalPanel() {
         setPreferredSize(new Dimension(400, 400));
@@ -47,9 +49,14 @@ public class SpaceSurvivalPanel extends JPanel implements ActionListener, MouseL
         walls.add(new Wall(1032 - 2200, 457 - 800));
         walls.add(new Wall(1497 - 2200, 457 - 800));
 
+        teleporters.add(new Teleporter(2276 - 2250 - 1955, 998 - 800 + 73, 733 - 2200 - 80, 807 - 800 + 73));
+        teleporters.add(new Teleporter(2276 - 2250 - 1955 + 1380 + 150, 807 - 800 + 73, 2276 - 2250 - 1955 + 1380 + 160, 633 - 800 + 73));
+        teleporters.add(new Teleporter(2276 - 2250 - 1955 + 1380 - 420, 633 - 800 + 73, 2276 - 2250 - 1955 + 1380 - 800 + 200, 357 - 700 + 73));
+        teleporters.add(new Teleporter(2276 - 2250 - 1955 + 1380 - 245, 357 - 700 + 73, 733 - 2200, 1192 - 730));
+
         ship = new Ship(-2200, -600);
       
-        map = new Map(0, 0, KeyEvent.VK_A, KeyEvent.VK_D, stars, walls, ship, player);
+        map = new Map(0, 0, KeyEvent.VK_A, KeyEvent.VK_D, KeyEvent.VK_W, stars, walls, ship, player, teleporters);
     }
 
     private void move() {
@@ -92,9 +99,9 @@ public class SpaceSurvivalPanel extends JPanel implements ActionListener, MouseL
         star.draw(g);
       }
       ship.draw(g);
-      /*for(Wall wall : walls){
-        wall.draw(g);
-      }*/
+      for(Teleporter teleporter : teleporters){
+        teleporter.draw(g);
+      }
       
       player.draw(g);
     }
