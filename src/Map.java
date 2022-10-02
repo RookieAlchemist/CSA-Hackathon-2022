@@ -7,14 +7,12 @@ public class Map {
     private ArrayList<Star> stars;
     private ArrayList<Wall> walls;
     private ArrayList<Teleporter> teleporters;
+    private ArrayList<Document> documents;
     private Ship ship;
     private Player player;
     private int cooldown;
-
-    //private Image spriteship = new ImageIcon("stargazerbckgrnd.png").getImage();
     
-  
-    public Map(int xcoord, int ycoord, int l, int r, int w, ArrayList<Star> list_of_stars, ArrayList<Wall> list_of_walls, Ship starship, Player P, ArrayList<Teleporter> portals) {
+    public Map(int xcoord, int ycoord, int l, int r, int w, ArrayList<Star> list_of_stars, ArrayList<Wall> list_of_walls, Ship starship, Player P, ArrayList<Teleporter> portals, ArrayList<Document> docs) {
       x = xcoord;
       y = ycoord;
       left = l;
@@ -25,6 +23,7 @@ public class Map {
       ship = starship;
       player = P;
       teleporters = portals;
+      documents = docs;
     }
 
     public void move(boolean[] keys) {
@@ -72,6 +71,9 @@ public class Map {
       for(Teleporter teleporter : teleporters){
         teleporter.move(num);
       }
+      for(Document document : documents){
+        document.move(num);
+      }
       ship.move(num);
     }
 
@@ -85,6 +87,9 @@ public class Map {
       }
       for(Teleporter teleporter : teleporters){
         teleporter.moveY(num);
+      }
+      for(Document document : documents){
+        document.moveY(num);
       }
       ship.moveY(num);
     }

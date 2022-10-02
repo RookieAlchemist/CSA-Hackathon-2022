@@ -17,9 +17,12 @@ public class SpaceSurvivalPanel extends JPanel implements ActionListener, MouseL
     private ArrayList<Star> stars = new ArrayList<Star>();
     private ArrayList<Wall> walls = new ArrayList<Wall>();
     private ArrayList<Teleporter> teleporters = new ArrayList<Teleporter>();
+    private ArrayList<Document> documents = new ArrayList<Document>();
 //2510, 1100
     private Image spriteship = new ImageIcon("stargazerbckgrnd.png").getImage().getScaledInstance(2510, 1100, Image.SCALE_DEFAULT);
     private Image teleprterpic = new ImageIcon("teleport.png").getImage().getScaledInstance(80, 120, Image.SCALE_DEFAULT);
+    private Image scrollicon = new ImageIcon("scrollicon.png").getImage().getScaledInstance(40, 50, Image.SCALE_DEFAULT);
+    private Image scroll1 = new ImageIcon("scroll1.png").getImage();
 
     public SpaceSurvivalPanel() {
         setPreferredSize(new Dimension(400, 400));
@@ -54,9 +57,11 @@ public class SpaceSurvivalPanel extends JPanel implements ActionListener, MouseL
         teleporters.add(new Teleporter(2276 - 2250 - 1955 + 1380 - 420, 633 - 800 + 73, 2276 - 2250 - 1955 + 1380 - 800 + 200, 357 - 700 + 73));
         teleporters.add(new Teleporter(2276 - 2250 - 1955 + 1380 - 245, 357 - 700 + 73, 733 - 2200, 1192 - 730));
 
+        documents.add(new Document(1312 - 2260, 635 - 610, KeyEvent.VK_E, KeyEvent.VK_Q, KeyEvent.VK_W, KeyEvent.VK_S, scroll1, player));
+
         ship = new Ship(-2200, -600);
       
-        map = new Map(0, 0, KeyEvent.VK_A, KeyEvent.VK_D, KeyEvent.VK_W, stars, walls, ship, player, teleporters);
+        map = new Map(0, 0, KeyEvent.VK_A, KeyEvent.VK_D, KeyEvent.VK_W, stars, walls, ship, player, teleporters, documents);
     }
 
     private void move() {
@@ -66,11 +71,15 @@ public class SpaceSurvivalPanel extends JPanel implements ActionListener, MouseL
         for(Star star : stars){
           star.move();
         }
+        for(Document document: documents){
+          document.move(keys);
+        }
       
         map.move(keys);
 
         controls(keys);
         repeat(keys);
+        
 
     }
 
@@ -102,8 +111,13 @@ public class SpaceSurvivalPanel extends JPanel implements ActionListener, MouseL
       for(Teleporter teleporter : teleporters){
         teleporter.draw(g);
       }
-      
+      for(Document document: documents){
+        document.drawicon(g);
+      }
       player.draw(g);
+      for(Document document: documents){
+        document.draw(g);
+      }
     }
 
     @Override
