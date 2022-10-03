@@ -4,7 +4,8 @@ The Space Apps 2022 Hackathon submission from Abdullah Mustafa and Ahmad Arain, 
 
 We made a game where you play as an astronaut in a spaceship 100 years into the future. Run around the spaceship, look for documents (read them closely) and complete missions as you learn about the hazards of space operations and space travel.
 
-To play the game, run the [main file](src/Main.java).
+To play the game, run the [main file](src/SpaceShipStruggles.java).
+Link to the [demo](demo.pdf) slides.
 
 ### Commands
 Press `A` and `D` to move left and right.
