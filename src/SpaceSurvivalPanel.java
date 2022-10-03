@@ -144,6 +144,23 @@ public class SpaceSurvivalPanel extends JPanel implements ActionListener, MouseL
     private void controls(boolean[] keys){
     }
 
+    private int framecount = 0; 
+    private void dialoge(Graphics g){
+      framecount++;
+      g.setFont(new Font("Georgia", Font.BOLD, 10));
+
+      if (framecount > 0 && framecount < 200){
+        g.drawString("WHAT JUST HAPPENED!?", 25, 375);
+      } else if (framecount > 220 && framecount < 420) {
+        g.drawString("SYSTEM.ERROR: SHIEDS DOWN", 15, 305);
+        g.drawString("SYSTEM.ERROR: ASTROID COLISION EN ROUTE", 15, 330);
+        g.drawString("SYSTEM.ERROR: TREJECTORY CHANGED.", 15, 355);
+        g.drawString("ATMOSPHERE INBOUND.", 15, 380);
+      } else if (framecount > 460 && framecount < 660) {
+        g.drawString("Huh, I guess I'll have to find out.", 25, 375);
+      }
+    }
+
     @Override
     public void paint(Graphics g) {
       g.setColor(Color.BLACK);
@@ -161,6 +178,7 @@ public class SpaceSurvivalPanel extends JPanel implements ActionListener, MouseL
       for(Teleporter teleporter : teleporters){
         teleporter.draw(g);
       }
+      dialoge(g);
       for(Document document: documents){
         document.draw(g);
       }
