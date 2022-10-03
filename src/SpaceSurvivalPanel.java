@@ -167,12 +167,14 @@ public class SpaceSurvivalPanel extends JPanel implements ActionListener, MouseL
       for(Trivia trivia: trivias){
         trivia.draw(g);
       }
+      missionscomplete = true;
       if(missionscomplete){
-        g.setFont(new Font("Agency FB", Font.BOLD, 20));
-        g.drawString("Missions Complete: Navigate to the start and press E.", 30, 370);
+        g.setFont(new Font("Georgia", Font.BOLD, 15));
+        g.drawString("Missions Complete: Navigate to the start", 25, 350);
+        g.drawString("and press E.", 25, 375);
       } 
       if(gameover){
-        g.drawImage(end, 0, 0, null);
+        g.drawImage(end, 0, 0, null);   
       }
     }
 

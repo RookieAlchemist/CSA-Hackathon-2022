@@ -59,7 +59,6 @@ public class Map {
         }
       }
       if (keys[teleport] && cooldown > 10){
-        System.out.println("" + x + ", " + y);
         cooldown = 0;
       }
     }
